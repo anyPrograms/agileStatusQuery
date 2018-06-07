@@ -1,0 +1,43 @@
+/* CSS Document */
+table.t1 {  
+		width:980px
+        margin-top:10px;  
+        margin-left:20px;  
+        margin-right:20px;  
+        margin-bottom:5px;  
+        #background-color: #FFF;  
+        #background:#EEF4F9;  
+        #border: none;  
+        border: 1;  
+        #color:#003755;  
+        border-collapse:collapse;  
+        font: 20px  "Arial";  
+}  
+  
+table.t1 th{  
+        background:#7CB8E2;  
+        color:#fff;  
+        padding:6px 4px;  
+        text-align:center;  
+		}  
+  
+table.t1 td{  
+        background:#C7DDEE none repeat-x scroll center left;  
+        color:#000;  
+        padding:4px 2px; 
+		font: 16px Microsoft YaHei; 
+}  
+  
+table.t1 a{  
+        text-decoration:none;  
+        height:1em;  
+}  
+  
+table.t1 a:link, table.t1  a:visited{  
+        color:#3366CC;  
+}  
+table.t1  a:hover{                                      /* ��꾭��ʱ */  
+        color:#B50000;  
+        text-decoration:underline;  
+}  
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>agileStatusQuery</title>
+  <link href="index.css" type="text/css" rel="stylesheet" />
+  <!-- Javascript goes in the document HEAD -->
+  <script type="text/javascript"> 
+    //init method one 
+    $(document).ready(function () {
+      trace("初始化方法进入");
+    });
+    function trace(obj) {
+      console.log(obj);
+    } 
+  </script>
+
+  </script>
+<script>
+	function selectall() {  
+    var a = document.all;  
+    for(var i = 0;i<a.length;i++) {  
+       if(typeof a[i]!="undefind" && a[i].type=='checkbox') {  
+          a[i].checked=true;  
+       }  
+    }  
+  }  
+</script>
+</head>
+<div class="Tab"></div>
+
+<body>
+  <hr>
+  <center>
+    <form action="" name="form1">
+      <table width="1259" height="227" border="1" class="t1">
+        <tr>
+          <th width="122" height="54">Id</th>
+          <th width="401">啄木鸟id</th>
+          <th width="205">name</th>
+          <th width="503">
+            <div align="center">查询</div>          </th>
+        </tr>
+        <tr>
+          <td height="46">123</td>
+          <td>123456</td>
+          <td>123          <kbd><a href="http://www.jb51.net/web/69028.html">
+          <input name="编辑" type="button" value="bj" onClick="selectall()" />
+          </a></kbd></td>
+          <td>
+            <div align="center" class="t1">
+          <kbd><a href="http://www.jb51.net/web/69028.html"> 查看</a> </kbd></div>          </td>
+        </tr>
+        <!-- {
+        <td height="38">123</td>
+        <td>123456</td>
+        <td>123</td>
+        <td>
+          <div align="center">
+            <a href="updataEmp.html">查看</a>
+          </div>
+        </td>
+        </tr>
+        } -->
+        <td height="36">123</td>
+        <td>123456</td>
+        <td>111</td>
+        <td>
+          <div align="center">
+            <a href="updataEmp.html">查看</a>          </div>        </td>
+        </tr>
+        <td height="39">123</td>
+        <td>123456</td>
+        <td>111</td>
+        <td>
+          <div align="center">
+            <a href="updataEmp.html">查看</a>          </div>        </td>
+        </tr>
+      </table>
+    </form>
+  </center>
+</body>
+
+</html>
