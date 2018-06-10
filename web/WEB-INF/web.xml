@@ -5,13 +5,31 @@
          version="4.0">
 
     <servlet>
-    <servlet-name>log4j-init</servlet-name>
-    <servlet-class>com.baidu.agileStatusQuery.servlets.Log4jInit</servlet-class>
-    <init-param>
-        <param-name>log4j</param-name>
-        <param-value>WEB-INF/config/log4j.properties</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-</servlet>
+        <servlet-name>log4j-init</servlet-name>
+        <servlet-class>com.baidu.agileStatusQuery.servlets.Log4jInit</servlet-class>
+        <init-param>
+            <param-name>log4j</param-name>
+            <param-value>WEB-INF/config/log4j.properties</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-        </web-app>
+    <servlet>
+        <servlet-name>entranceServlet</servlet-name>
+        <servlet-class>com.baidu.agileStatusQuery.servlets.entranceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>entranceServlet</servlet-name>
+        <url-pattern>/initialize.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>clickForDetails</servlet-name>
+        <servlet-class>com.baidu.agileStatusQuery.servlets.clickForDetails</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>clickForDetails</servlet-name>
+        <url-pattern>/details.do</url-pattern>
+    </servlet-mapping>
+
+</web-app>
