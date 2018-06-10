@@ -28,12 +28,11 @@ public interface Iservice {
     /**
      * ③点击之后展开参数列表
      *
-     * @param moduleName 该模块的名字
-     * @param jobConfId  该模块包含的任务Id
+     * @param jobConfId 该模块包含的任务Id
      * @return 返回一个json字符串
      * @throws Exception
      */
-    public String clickForDetails(String moduleName, String jobConfId) throws Exception;
+    public String clickForDetails(String jobConfId) throws Exception;
 
     /**
      * ④⑤javabean对象转json对象
@@ -43,6 +42,7 @@ public interface Iservice {
      * @throws Exception
      */
     public JSONObject javaBean2jsonObj(argumentsBean arguObj) throws Exception;
+
     public JSONObject javaBean2jsonObj(valueBean valueObj) throws Exception;
 
     /**

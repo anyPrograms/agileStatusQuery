@@ -21,6 +21,7 @@ public class infoDaoImpl implements IInfoDao {
     public boolean doUpdate(String param, String id, String value) {
         Connection conn = null;
         PreparedStatement stat = null;
+        value="'"+value+"'";
         int rowCount = 0;//受影响的行数
         String sql = "";
         try {
@@ -31,11 +32,11 @@ public class infoDaoImpl implements IInfoDao {
                     break;
                 }
                 case "argu": {
-                    sql = "update tb_info SET arguments=" + value + "WHERE id=" + id;
+                    sql = "update tb_info SET arguments=" + value + " WHERE id=" + id;
                     break;
                 }
                 default: {
-                    log.error("doUpdate(String param,String id,String value)参数格式不正确：" +
+                    log.error("doUpdate(String param,String id,String value)参数格式不正确::" +
                             "param:" + param + ",id:" + id + ",value:" + value);
                     return false;
                 }
@@ -44,7 +45,7 @@ public class infoDaoImpl implements IInfoDao {
             rowCount = stat.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            log.error("update database error:" + e);
+            log.error("update database error::" + e);
         } finally {
             closeConn(stat, conn);
         }
@@ -59,8 +60,8 @@ public class infoDaoImpl implements IInfoDao {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
+        value="'"+value+"'";
         List<valueBean> listOfValue = new ArrayList<valueBean>();
-        valueBean valueObject = new valueBean();
         try {
             conn = getConn();
             String sql = "";
@@ -74,7 +75,7 @@ public class infoDaoImpl implements IInfoDao {
                     break;
                 }
                 default: {
-                    log.error("doQuery(String param,String value)参数格式不正确：" +
+                    log.error("doQuery(String param,String value)参数格式不正确::" +
                             "param:" + param + ",value:" + value);
                     break;
                 }
@@ -82,6 +83,7 @@ public class infoDaoImpl implements IInfoDao {
             stat = conn.prepareStatement(sql);
             rs = stat.executeQuery();
             while (rs.next()) {
+                valueBean valueObject = new valueBean();
                 valueObject.setId(rs.getInt("id"));
                 valueObject.setName(rs.getString("name"));
                 valueObject.setJobConfId(rs.getString("jobConfId"));
@@ -90,7 +92,7 @@ public class infoDaoImpl implements IInfoDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("search database error:" + e);
+            log.error("search database error::" + e);
         } finally {
             closeConn(rs, stat, conn);
         }
@@ -103,13 +105,14 @@ public class infoDaoImpl implements IInfoDao {
         PreparedStatement stat = null;
         ResultSet rs = null;
         List<valueBean> listOfValue = new ArrayList<valueBean>();
-        valueBean valueObject = new valueBean();
+
         try {
             conn = getConn();
             String sql = "select * from tb_info";
             stat = conn.prepareStatement(sql);
             rs = stat.executeQuery();
             while(rs.next()){
+                valueBean valueObject = new valueBean();
                 valueObject.setId(rs.getInt("id"));
                 valueObject.setName(rs.getString("name"));
                 valueObject.setJobConfId(rs.getString("jobConfId"));
@@ -118,7 +121,7 @@ public class infoDaoImpl implements IInfoDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("search database error:" + e);
+            log.error("search database error::" + e);
         } finally {
             closeConn(rs, stat, conn);
         }

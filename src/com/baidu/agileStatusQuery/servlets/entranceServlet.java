@@ -27,7 +27,7 @@ public class entranceServlet extends HttpServlet {
             out.write(service.initialize());
         }catch(Exception e){
             e.printStackTrace();
-            log.error("entranceServlet error:"+e);
+            log.error("entranceServlet error::"+e);
         }finally{
             out.flush();
             out.close();

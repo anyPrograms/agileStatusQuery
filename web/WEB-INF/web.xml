@@ -32,4 +32,10 @@
         <url-pattern>/details.do</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>com.baidu.agileStatusQuery.utils.ListenerLoadConfig</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.baidu.agileStatusQuery.servlets.Log4jInit</listener-class>
+    </listener>
 </web-app>

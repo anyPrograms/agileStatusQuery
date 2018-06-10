@@ -33,7 +33,7 @@ public class LoadDBConfig {
             dbMap.put("password", password);
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("load database config error:" + e);
+            log.error("load database config error::" + e);
         }
     }
 
