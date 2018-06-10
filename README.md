@@ -1,10 +1,10 @@
 # agileStatusQuery
 ## agile job执行状态查询器
 
-## Author : Michael Joe,Min Li;
+### Author : Michael Joe,Min Li;
 
-接口文档：
-##【初始化】
+## 接口文档：
+## 【初始化】
 ### 地址：/initialize.do
 ### 请求方式：GET/POST
 ### 参数列表：
@@ -70,7 +70,7 @@
 ]
 ```
 
-##【查看详情】
+## 【查看详情】
 ### 地址：/initialize.do
 ### 请求方式：GET/POST
 ### 参数列表：
