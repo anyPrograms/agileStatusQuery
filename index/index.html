@@ -1,51 +1,129 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>无标题文档</title>
-<link href="css.css" type="text/css" rel="stylesheet" />
- <div class="main">
-	<div class="main1";>
-		<div class="main11";>
-			<div class="main-chaxun">
-		  		<div class="main-chaxun-tishi">
-					<span>&emsp;呼	 叫 云 id:  </span>
-				</div>
-					<input name="text" type="text" class="main-chaxun-text"	 />		
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+	<link href="css.css" type="text/css" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/upload.js"></script>
+</head>
+
+<script>
+	function test() {
+		var a = confirm("是否删除？");
+		if (a)
+
+			alert("删除成功！");
+		else alert("操作失败！");
+	}
+</script>
+<script>
+	var isCheckAl = 1;
+	function selectall() {
+		var a = document.all;
+		if (isCheckAl == 1) {
+			for (var i = 0; i < a.length; i++) {
+				if (typeof a[i] != "undefind" && a[i].type == 'checkbox') {
+					a[i].checked = true;
+				}
+			}
+			isCheckAl = 0;
+		}
+		else {
+			for (var i = 0; i < a.length; i++) {
+				if (typeof a[i] != "undefind" && a[i].type == 'checkbox') {
+					a[i].checked = false;
+				}
+			}
+			isCheckAl = 1;
+		}
+	}
+</script>
+<script>  
+</script>
+
+
+
+
+<div class="mainBackground">
+	<div class="secondBackground" ;>
+		<div class="thirdBackground" ;>
+
+			<div class="Inquire">
+				<form id="form">
+					<div class="Inquire-prompt">
+						<span>&emsp;呼 叫 云 id: </span>
+					</div>
+					<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
+				</form>
 			</div>
-			<div class="main-chaxun">
-		  		<div class="main-chaxun-tishi">
-					<span>&emsp;n a m e:  </span>
-				</div>
-					<input name="text" type="text" class="main-chaxun-text"	 />		
+			<div class="Inquire">
+				<form id="form">
+					<div class="Inquire-prompt">
+						<span>&emsp;n a m e: </span>
+					</div>
+					<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
+				</form>
 			</div>
-		<input type="button" class="main-button-cx"  value="查 询"/>
-		<input type="button" class="main-button-cx" value="新 增"/>
+			<form id="form">
+				<input type="button" class="Inquir-button" value="查 询" onclick="upload()" />
+			</form>
 			<div class="white">
 			</div>
-			<div class="main-list-title">
-					<span><b>自定义信息</b></span>
+			<div class="list-title">
+				<span>
+					<b>自定义信息</b>
+				</span>
 			</div>
-			<form action=""  name="form1">
-				<table class="biao1";>
+			<input name="button" type="button" class="button-delect" value="删 除" onClick="test()" />
+			<input name="button" type="button" class="button-insert" value="新 增" onclick="addTableRow" />
+			<form action="" name="form1">
+				<table class="table" ; id="table1">
 					<tr>
-						<th width=9%>Id</th>
-					  	<th width=21%>name</th>
-					  	<th width=41%>啄木鸟id</th>
-					  	<th width=21%>操作</th>
+						<th width=4%>
+							<input name="checkbox" type="checkbox" class="button-allselect" onclick="selectall()" />
+						</th>
+						<th width=11%>id</th>
+						<!--					  	<th width=21%>name</th>-->
+						<th width=36%>n a m e</th>
+						<th width=21%>可执行操作</th>
 					</tr>
-						<td height="34px" align="center">123</td>
-						<td align="center">123456</td>
-						<td align="center">123</td>
-							<td>
-								<div align="center" class="t1">
-									<kbd><a href="http://www.jb51.net/web/69028.html"> 查看</a> </kbd>
-								</div>          
-							</td>
-						</tr>
+					<td height="34px" align="center">
+						<input type="checkbox" class="button-allselect">
+					</td>
+					<td align="center">123456</td>
+					<!--						<td align="center">123</td>-->
+					<td align="center">123</td>
+					<td>
+						<div align="center" class="button-column">
+							<kbd>
+								<a class="look" href="file:///C:/Users/v_limin05/Desktop/index/index-xq.html"> 查 看&emsp; </a>
+							</kbd>
+							<kbd>
+								<a class="look" href="http://www.jb51.net/web/69028.html"> &emsp;&emsp;修 改</a>
+							</kbd>
+						</div>
+					</td>
+					<script>
+						var sta = '';
+						for (i = 0; i < 4; i++) {
+							sta = sta + "<td height="34px" align="center"><input type="checkbox" class="button-allselect"></td>
+								< td align = "center" > 123456</td >
+									<td align="center">123</td>
+									<td align="center">123</td>
+									<td>
+										<div align="center" class="button-column">
+											<kbd><a class="look" href="file:///C:/Users/v_limin05/Desktop/index/index-xq.html"> 查 看&emsp; </a> </kbd>
+											<kbd><a class="look" href="http://www.jb51.net/web/69028.html"> &emsp;&emsp;修 改</a> </kbd>
+										</div>
+									</td>";}
+						print("sta");
+					</script>
 				</table>
 			</form>
 		</div>
+		<div class="guestbook">如果您对Agile有什么建议，请给我们来信</div>
 	</div>
 </div>
-
