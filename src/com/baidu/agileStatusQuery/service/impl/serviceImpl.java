@@ -2,10 +2,8 @@ package com.baidu.agileStatusQuery.service.impl;
 
 import com.baidu.agileStatusQuery.beans.argumentsBean;
 import com.baidu.agileStatusQuery.beans.valueBean;
-import com.baidu.agileStatusQuery.dao.IInfoDao;
 import com.baidu.agileStatusQuery.dao.impl.infoDaoImpl;
 import com.baidu.agileStatusQuery.service.Iservice;
-import com.google.gson.JsonArray;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -36,19 +34,21 @@ public class serviceImpl implements Iservice {
                 valueObject = listOfValue.get(i);
 
                 String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + valueObject.getJobConfId();
-                String jsonStr = this.sendPost("", url);
-                valueObject.setArguments(jsonStr);
+                String jsonStr = "[]";
+                jsonStr = this.sendPost("", url);
 
-                //更新数据库
                 JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
 
+                //当远程数据为空的时候，读本地数据库存储的数据；
                 if (jsonArrOrigin.size() == 0) {
-                    return "null";
+
                 } else if (jsonArrOrigin.size() == 1) {
+                    valueObject.setArguments(jsonStr);//将agile返回数据存入对象
                     argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(0));
                     JSONObject jsonObj_temp = this.javaBean2jsonObj(arguObj);
                     valueObject.setArguments(jsonObj_temp.toString());//将该json对象转换为valueBean对象的参数
                 } else {
+                    valueObject.setArguments(jsonStr);//将agile返回数据存入对象
                     JSONArray jsonArrForMultiObjects = new JSONArray();
                     for (int j = 0; j < jsonArrOrigin.size(); j++) {
                         argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(j));
@@ -57,11 +57,12 @@ public class serviceImpl implements Iservice {
                     valueObject.setArguments(jsonArrForMultiObjects.toString());//将该json数组转换为valueBean对象的参数
                 }
 
+                //更新数据库
                 boolean result = infoObject.doUpdate("argu", String.valueOf(valueObject.getId()), valueObject.getArguments());
                 if (result == true) {
                     log.info("Update database successfully!");
                 } else {
-                    log.error("Failed to update database!");
+                    log.info("No data need to be updated!");
                 }
 //                //将arguments字段置为空，减少传输消耗；
 //                valueObject.setArguments("");
@@ -83,7 +84,7 @@ public class serviceImpl implements Iservice {
         //byte[] data = jsonStr.getBytes();
         java.net.URL url = null;
         java.net.HttpURLConnection conn = null;
-        String msg = "";//保存调用http服务后的响应信息
+        String msg = "[]";//保存调用http服务后的响应信息
         try {
             url = new java.net.URL(path);
             conn = (java.net.HttpURLConnection) url.openConnection();
@@ -110,7 +111,14 @@ public class serviceImpl implements Iservice {
             e.printStackTrace();
             log.error("调用agile接口失败::" + e);
         }
-        return msg;
+
+        String defaultString = "Param is invalid!";
+        if (msg.equals(defaultString)) {
+            log.info("jobConfId 参数错误::"+path);
+            return "";
+        } else {
+            return msg;
+        }
     }
 
     @Override
@@ -151,8 +159,8 @@ public class serviceImpl implements Iservice {
         jsonObj.put("jobConfId", arguObj.getJobConfId());
         jsonObj.put("jobName", arguObj.getJobName());
         jsonObj.put("status", arguObj.getStatus());
-        jsonObj.put("endTime", arguObj.getEndTime());
         jsonObj.put("startTime", arguObj.getStartTime());
+        jsonObj.put("endTime", arguObj.getEndTime());
         jsonObj.put("duration", arguObj.getDuration());
         jsonObj.put("triggerUser", arguObj.getTriggerUser());
 

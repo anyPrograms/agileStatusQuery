@@ -7,8 +7,8 @@ public class argumentsBean {
     private String jobConfId;
     private String jobName;
     private String status;
-    private String endTime;
     private String startTime;
+    private String endTime;
     private String duration;//持续时间
     private String triggerUser;//执行者
 
@@ -48,20 +48,20 @@ public class argumentsBean {
         this.status = status;
     }
 
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getStartTime() {
         return startTime;
     }
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getDuration() {
