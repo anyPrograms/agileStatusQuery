@@ -123,7 +123,7 @@ public class serviceImpl implements Iservice {
 
     @Override
     public String clickForDetails(String jobConfId) {
-        JSONArray jsonArrNew = new JSONArray();//用于存储模块名和返回的json数组
+        JSONObject jsonObjNew = new JSONObject();//用于存储模块名和返回的json数组
         JSONArray jsonArr = new JSONArray();//用于存储从unix时间戳转换为普通时间之后的json对象
         JSONObject jsonObj = new JSONObject();
         infoDaoImpl infoObj = new infoDaoImpl();
@@ -132,8 +132,7 @@ public class serviceImpl implements Iservice {
         if (listObj.size() == 0) {
             return "null";
         }
-        jsonObj.put("moduleName", listObj.get(0).getName());
-        jsonArrNew.add(jsonObj);
+        jsonObjNew.put("moduleName", listObj.get(0).getName());
         String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfId;
         String jsonStr = this.sendPost("", url);
         //字符串转json数组
@@ -143,12 +142,12 @@ public class serviceImpl implements Iservice {
                 argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(i));
                 jsonArr.add(this.javaBean2jsonObj(arguObj));
             }
-            jsonArrNew.add(jsonArr);
+            jsonObjNew.put("arguments",jsonArr);
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Transcode jsonObject to javaBean error::" + e);
         }
-        return jsonArrNew.toString();
+        return jsonObjNew.toString();
 
     }
 
