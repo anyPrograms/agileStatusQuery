@@ -80,29 +80,27 @@
 
 ### 返回格式：
 ``` json
-[
-    {
-        "moduleName":"金牌销售"
-    },
-    [
+{
+    "moduleName": "金牌销售",
+    "arguments": [
         {
-            "jobConfId":"778153",
-            "jobName":"编译",
-            "status":"SUCC",
-            "endTime":"2018-06-07 19:38:34",
-            "startTime":"2018-06-07 19:34:01",
-            "duration":"4m33s",
-            "triggerUser":"wangcaixia01"
+            "jobConfId": "778153",
+            "jobName": "编译",
+            "status": "SUCC",
+            "startTime": "2018-06-12 14:59:07",
+            "endTime": "2018-06-12 15:01:56",
+            "duration": "2m49s",
+            "triggerUser": "wangcaixia01"
         },
         {
-            "jobConfId":"803611",
-            "jobName":"猫头鹰源码安全扫描",
-            "status":"CANCEL",
-            "endTime":"2018-06-07 19:50:48",
-            "startTime":"2018-06-07 19:38:35",
-            "duration":"12m13s",
-            "triggerUser":"wangcaixia01"
+            "jobConfId": "803611",
+            "jobName": "猫头鹰源码安全扫描",
+            "status": "SUCC",
+            "startTime": "2018-06-12 15:01:57",
+            "endTime": "2018-06-12 15:27:01",
+            "duration": "25m4s",
+            "triggerUser": "wangcaixia01"
         }
     ]
-]
+}
 ```
