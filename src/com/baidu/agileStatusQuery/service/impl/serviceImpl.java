@@ -114,7 +114,7 @@ public class serviceImpl implements Iservice {
 
         String defaultString = "Param is invalid!";
         if (msg.equals(defaultString)) {
-            log.info("jobConfId 参数错误::"+path);
+            log.info("jobConfId 参数错误,请检查拼写::" + path);
             return "";
         } else {
             return msg;
