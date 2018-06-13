@@ -3,7 +3,6 @@ package com.baidu.agileStatusQuery.dao.impl;
 import com.baidu.agileStatusQuery.beans.valueBean;
 import com.baidu.agileStatusQuery.dao.IInfoDao;
 import org.apache.log4j.Logger;
-import sun.awt.SunHints;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
