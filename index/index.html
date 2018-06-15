@@ -1,105 +1,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <body>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>无标题文档</title>
-	<link href="css/css.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>无标题文档</title>
+		<link href="css/css.css" type="text/css" rel="stylesheet" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/delete.js"></script>
+		<script type="text/javascript" src="js/selectall.js"></script>
+	</head>
+	<script>
+	</script>
 	
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>	
-	<script type="text/javascript" src="js/delete.js"></script>
-	<script type="text/javascript" src="js/selectall.js"></script>
-</head>
-
-<div class="mainBackground">
-	<div class="secondBackground" ;>
-		<div class="thirdBackground" ;>
-			<div class="Inquire">
-				<form id="form">
-					<div class="Inquire-prompt">
-						<span >&emsp;呼 叫 云 id: </span>
-					</div>
-					<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
-				</form>
-			</div>
-			<div class="Inquire">
-				<form id="form">
-					<div class="Inquire-prompt">
-						<span>&emsp;n a m e: </span>
-					</div>
-					<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
-				</form>
-			</div>
-			<form id="form">
-				<input type="button" class="Inquir-button" value="查 询" onclick="upload()" />
-			</form>
-			<div class="white">
-			</div>
-			<div class="list-title">
-				<span>
-					<b>自定义信息</b>
-				</span>
-			</div>
-			<!-- <input name="button" type="button" class="button-delect" value="删 除" onClick="test()" />
-			<input name="button" type="button" class="button-insert" value="新 增" onclick="addTableRow" /> -->
-			<form action="" name="form1">
-				<table class="table" ; id="table1">
-					
-					<tr>
-						<th width=4%>
-							<input name="checkbox" type="checkbox" class="button-allselect" onclick="selectall()" />
-						</th>
-						<th width=11%>id</th>
-						<!--					  	<th width=21%>name</th>-->
-						<th width=36%>name</th>
-						<th width=21%>可执行操作</th>
-					</tr>
-					<tr>
-					<td height="34px" align="center">
-						<input type="checkbox" class="button-allselect">
-					</td>
-					<td align="center" id='demo'>00</td>
-					<!--						<td align="center">123</td>-->
-					<td align="center">123</td>
-					<td>
-						<div align="center" class="button-column">
-							<kbd>
-								<a class="look" href="http://localhost:8080/index-xq.html"> &emsp;查 看&emsp; </a>
-							</kbd>
-							<kbd>
-								<!-- <a class="look" href="http://www.jb51.net/web/69028.html"> &emsp;&emsp;修 改</a> -->
-							</kbd>
+	
+	<div class="mainBackground">
+		<div class="secondBackground" ;>
+			<div class="thirdBackground" ;>
+				<div class="Inquire">
+					<form id="form">
+						<div class="Inquire-prompt">
+							<span>&emsp;呼 叫 云 id: </span>
 						</div>
-					</td>
-					</tr>
-					<script>
-							var star
-							var a=7;
-							var index = 0;
-							var mycars=new Array("Saab","Volvo","BMW","111")
-							for (i = 1; i < a; i++) {
-							star = "<tr>"+
-								"<td height="+"'34px'"+" align='center'>"+
-								"<input type = 'checkbox' class='button-allselect' ></td >"+
-									"<td align='center' class='demo'>" +"0"+ (++index) + "</td >"+
-									"<td align='center'>"+mycars[i-1]+"</td>" +
-									"<td>"+
-										"<div align='center' class='button-column'>"+
-											"<kbd><a class='look' href='http://localhost:8080/index-xq.html'> &emsp;查 看&emsp; </a> </kbd>"+
-										"</div>"+
-									"</td>"+
-									"</tr>"
-								document.write(star);
-							}
-					</script>
-				</table>
-			</form>
+						<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
+					</form>
+				</div>
+				<div class="Inquire">
+					<form id="form">
+						<div class="Inquire-prompt">
+							<span>&emsp;n a m e: </span>
+						</div>
+						<input name="text" type="text" class="Inquire-text" name="idForQuery" id="idForQuery" />
+					</form>
+				</div>
+				<form id="form">
+					<input type="button" class="Inquir-button" value="查 询" onclick="upload()" />
+				</form>
+				<div class="white">
+				</div>
+				<div class="list-title">
+					<span>
+						<b>自定义信息</b>
+					</span>
+				</div>
+				<!-- <input name="button" type="button" class="button-delect" value="删 除" onClick="test()" />
+			<input name="button" type="button" class="button-insert" value="新 增" onclick="addTableRow" /> -->
+				<form action="" name="form1">
+					<table class="table" ; id="tableMain">
+						<tr>
+							<th width=4%>
+								<input name="checkbox" type="checkbox" class="button-allselect" onclick="selectall()" />
+							</th>
+							<th width=11%>id</th>
+							<!--					  	<th width=21%>name</th>-->
+							<th width=36%>name</th>
+							<th width=21%>可执行操作</th>
+						</tr>
+						<tr>
+							<td height="34px" align="center">
+								<input type="checkbox" class="button-allselect" onclick='chack'>
+							</td>
+							<td align="center">00</td>
+							<!--						<td align="center">123</td>-->
+							<td align="center">123</td>
+							<td>
+								<div align="center" class="button-column">
+									<kbd>
+										<a class="look" href="http://localhost:8080/index-xq.html?value="> &emsp;查 看&emsp; </a>
+									</kbd>
+									<kbd>
+										<!-- <a class="look" href="http://www.jb51.net/web/69028.html"> &emsp;&emsp;修 改</a> -->
+									</kbd>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="guestbook">如果您对Agile有什么建议，请给我们来信</div>
 		</div>
-		<div class="guestbook">如果您对Agile有什么建议，请给我们来信</div>
 	</div>
-</div>
 </body>
+
 </html>

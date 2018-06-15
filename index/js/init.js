@@ -1,24 +1,27 @@
 window.onload=function() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/initialize.do",
-        data: $('#form').serialize(),
-        datatype:String,
-        success: function (result) {
-            // var mycars=new Array
-            // var mycar=new Array
-            // mycars = JSONObject.parseObject(result);
-            // mycars = Integer.parseInt(mycars("id"));
-            alert("传回来的字符串：");
-            alert("提交成功！");
-            // for(i=0;i<6;i++)
-            // $(".demo").eq(i).html(mycars[i]);
-        //     $.each(data,function(i,n){
-        //         alert(date);//显示name和test
-        //     });
-        },
-        error: function () {
-            alert("提交失败！");
+    var xmlHttp =new XMLHttpRequest();
+    xmlHttp.open('GET',"http://localhost:8080/initialize.do",false);
+    xmlHttp.send(null);
+
+    if(xmlHttp.status==200){
+        var jsonStrOrigin=JSON.parse(xmlHttp.responseText);
+        for(var i=0;i<jsonStrOrigin.length;i++){
+            var jsonObjModule=jsonStrOrigin[i];
+            
+            var tableLine="<tr>" +
+            "<td height=" + "'34px'" + " align='center'>" +
+            "<input type = 'checkbox' class='button-allselect'></td >" +
+            "<td align='center' class='demo'>" +jsonObjModule.id+ "</td >" +
+            "<td align='center'>" +jsonObjModule.name+ "</td>" +
+            "<td>" +
+            "<div align='center' class='button-column'>" +
+            "<kbd><a class='look' href='http://localhost:8080/index-xq.html?value="+jsonObjModule.jobConfId+"'>&emsp;查 看&emsp;</a></kbd>" +
+            "</div>" +
+            "</td>" +
+            "</tr>";
+
+            $("#tableMain").append(tableLine);
         }
-    });
+    }       
+    
 }
