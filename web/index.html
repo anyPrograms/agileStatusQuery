@@ -1,51 +1,110 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>无标题文档</title>
-<link href="css.css" type="text/css" rel="stylesheet" />
- <div class="main">
-	<div class="main1";>
-		<div class="main11";>
-			<div class="main-chaxun">
-		  		<div class="main-chaxun-tishi">
-					<span>&emsp;呼	 叫 云 id:  </span>
-				</div>
-					<input name="text" type="text" class="main-chaxun-text"	 />		
-			</div>
-			<div class="main-chaxun">
-		  		<div class="main-chaxun-tishi">
-					<span>&emsp;n a m e:  </span>
-				</div>
-					<input name="text" type="text" class="main-chaxun-text"	 />		
-			</div>
-		<input type="button" class="main-button-cx"  value="查 询"/>
-		<input type="button" class="main-button-cx" value="新 增"/>
-			<div class="white">
-			</div>
-			<div class="main-list-title">
-					<span><b>自定义信息</b></span>
-			</div>
-			<form action=""  name="form1">
-				<table class="biao1";>
-					<tr>
-						<th width=9%>Id</th>
-					  	<th width=21%>name</th>
-					  	<th width=41%>啄木鸟id</th>
-					  	<th width=21%>操作</th>
-					</tr>
-						<td height="34px" align="center">123</td>
-						<td align="center">123456</td>
-						<td align="center">123</td>
-							<td>
-								<div align="center" class="t1">
-									<kbd><a href="http://www.jb51.net/web/69028.html"> 查看</a> </kbd>
-								</div>          
-							</td>
-						</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-</div>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>无标题文档</title>
+	<link rel="stylesheet" href="resources/element-ui/element-ui.min.css"/>
+	<script src="resources/jquery.min.js"></script>
+	<script src="resources/vue-resource.min.js"></script>
+	<script src="resources/vue.min.js"></script>
+	<script src="resources/element-ui/element-ui.min.js"></script>
+	
+  	<script src="resources/element-ui/lib/umd/locale/zh-CN.js"></script>
+	<script src="resources/element-ui/lib/umd/locale/en.js"></script>
+	
+	<link href="css.css" type="text/css" rel="stylesheet" />
+	<style>
+		.el-form-item__label {
+			text-align: right;
+			float: left;
+			font-size: 20px;	
+			color: #606266;
+			line-height: 40px;
+			padding: 0 12px 0 0;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.el-table th {
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
+			user-select: none;
+		}
+	</style>
+</head>
+	<body>
+		<div class="main">
+			<div class="main1">
+				<div class="main11">
+					<div id = "app">
 
+						<el-form :inline="true"  class="demo-form-inline" style="padding-top: 20px;">
+							<el-form-item label="呼叫云ID">
+								<el-input  placeholder="呼叫云ID"></el-input>
+							</el-form-item>
+							<el-form-item label="名称">
+									<el-input  placeholder="名称"></el-input>
+							</el-form-item>
+							<el-form-item>
+								<el-button type="primary">新增</el-button>
+								<el-button type="primary" >查询</el-button>
+							</el-form-item>
+						</el-form>
+						<div class="white">
+						</div>
+						<div class="main-list-title">
+								<span><b>自定义信息</b></span>
+						</div>
+						
+						<el-table  :data="tableData"  style="width: 100% ;margin-top: 60px;">
+							<el-table-column prop="id" label="ID"	width="200">
+							</el-table-column>
+							<el-table-column prop="name" label="名称"	width="220">
+							</el-table-column>
+							<el-table-column prop="jobConfId"	label="jobConfID">
+							</el-table-column>
+							<el-table-column  label="操作" align="center">
+								<el-button type="text" size="small">查看</el-button>
+							</el-table-column>
+						</el-table>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#app',
+		        data: function() {
+					return { 
+						tableData:[]
+					}
+		        },				
+				methods: {
+					handleClick: function(row) {
+						console.log(row);
+					},
+					getData: function(){
+						var _self = this;
+						$.ajax({
+							type: "get",
+							url: "http://localhost:8080/initialize.do",
+							dataType:JSON,
+							success: function (result) {
+								_self.tableData=result;
+							},
+							error: function (result) {
+								_self.tableData=[{id:"idFailed",name:"nameFailed"}];
+							}
+						});
+					}
+				},
+				created:function(){
+					this.getData();
+				}
+		    })
+		</script>
+	</body>	
+
+</html>
