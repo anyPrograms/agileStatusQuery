@@ -63,8 +63,10 @@
 							</el-table-column>
 							<el-table-column prop="jobConfId"	label="jobConfID">
 							</el-table-column>
-							<el-table-column  label="操作" align="center">
-								<el-button type="text" size="small">查看</el-button>
+							<el-table-column  inline-template label="操作" align="center">
+								<div>
+									<el-button type="text" size="small" @click.native="click(row.jobConfId)" >查看</el-button>
+                                </div>
 							</el-table-column>
 						</el-table>
 						
@@ -85,17 +87,20 @@
 					handleClick: function(row) {
 						console.log(row);
 					},
+					check: function(row){
+						console.log(row);
+					},
 					getData: function(){
 						var _self = this;
 						$.ajax({
 							type: "get",
 							url: "http://localhost:8080/initialize.do",
-							dataType:JSON,
+							dataType:"JSON",
 							success: function (result) {
 								_self.tableData=result;
 							},
 							error: function (result) {
-								_self.tableData=[{id:"idFailed",name:"nameFailed"}];
+								_self.tableData=[{id:"idFailed",name:"nameFailed",jobConfId:"111111"}];
 							}
 						});
 					}
