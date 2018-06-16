@@ -49,7 +49,7 @@
 						<div class="white">
 						</div>
 						<div class="main-list-title">
-								<span><b>自定义信息</b></span>
+								<span>{{moduleName}}</span>
 						</div>
 						
 						<el-table  :data="tableData"
@@ -88,7 +88,8 @@
 				el: '#app',
 		        data: function() {
 					return {
-						tableData:[]
+						tableData:[],
+						moduleName:""
 					}
 		        },				
 				methods: {
@@ -96,13 +97,15 @@
 						var _self = this;
 						$.ajax({
 							type: "get",
-							url: "http://localhost:8080/details.do?jobConfId"+jobConfId,
+							url: "http://localhost:8080/details.do?jobConfId="+jobConfId,
 							dataType:"JSON",
 							success: function (result) {
-								_self.tableData=result;
+								_self.tableData=result.argument;
+								_self.moduleName = result.moduleName;
 							},
 							error: function (result) {
 								_self.tableData=[{id:"idFailed"}];
+								_self.moduleName = "failed";
 							}
 						});
 					}
