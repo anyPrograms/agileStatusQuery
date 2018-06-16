@@ -135,9 +135,9 @@ public class serviceImpl implements Iservice {
         jsonObjNew.put("moduleName", listObj.get(0).getName());
         String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfId;
         String jsonStr = this.sendPost("", url);
-        if(jsonStr.length()==2){
-            jsonObjNew.put("arguments",listObj.get(0).getArguments());
-        }else {
+        if (jsonStr.length() == 2) {
+            jsonObjNew.put("arguments", listObj.get(0).getArguments());
+        } else {
             //字符串转json数组
             JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
             try {
@@ -189,10 +189,19 @@ public class serviceImpl implements Iservice {
         arguObj.setJobConfId(jsonObj.getString("jobConfId"));
         arguObj.setJobName(jsonObj.getString("jobName"));
         arguObj.setStatus(jsonObj.getString("status"));
-        String strDate = sd.format(new Date(jsonObj.getLong("startTime")));
-        arguObj.setStartTime(strDate);
-        strDate = sd.format(new Date(jsonObj.getLong("endTime")));
-        arguObj.setEndTime(strDate);
+        String strDate = null;
+        if (jsonObj.getString("startTime") == "null") {
+            arguObj.setStartTime(null);
+        } else {
+            strDate = sd.format(new Date(jsonObj.getLong("startTime")));
+            arguObj.setStartTime(strDate);
+        }
+        if (jsonObj.getString("endTime") == "null") {
+            arguObj.setEndTime(null);
+        } else {
+            strDate = sd.format(new Date(jsonObj.getLong("endTime")));
+            arguObj.setEndTime(strDate);
+        }
         arguObj.setDuration(jsonObj.getString("duration"));
         arguObj.setTriggerUser(jsonObj.getString("triggerUser"));
 
