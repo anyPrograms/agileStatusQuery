@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>无标题文档</title>
+	<title>agile状态查询</title>
 	<link rel="stylesheet" href="resources/element-ui/element-ui.min.css"/>
 	<script src="resources/jquery.min.js"></script>
 	<script src="resources/vue-resource.min.js"></script>
@@ -49,22 +49,22 @@
 						<div class="white">
 						</div>
 						<div class="main-list-title">
-								<span><b>自定义信息</b></span>
+								<span><b>agile状态查询</b></span>
 						</div>
 						
 						<el-table  :data="tableData"
 						border=true
 						stripe=true
 						style="width: 100% ;margin-top: 60px;">
-							<el-table-column prop="id" sortable label="ID"	width="200">
+							<el-table-column prop="id" sortable label="ID"	width="150">
 							</el-table-column>
 							<el-table-column prop="name" label="名称"	width="220">
 							</el-table-column>
-							<el-table-column prop="jobConfId"	label="jobConfID">
+							<el-table-column prop="jobConfId"	label="jobConfID" width="500">
 							</el-table-column>
 							<el-table-column  inline-template label="操作" align="center">
 								<div>
-									<el-button type="text" size="small" @click.native="check(row.jobConfId)" >查看</el-button>
+									<el-button type="info" size="small" @click.native="check(row.jobConfId)" >查看</el-button>
                                 </div>
 							</el-table-column>
 						</el-table>
@@ -87,7 +87,9 @@
 						console.log(row);
 					},
 					check: function(row){
-						window.location.href  ="http://localhost:8080/agileStatusQuery/index-detail.html?jobConfId="+row;
+						// window.location.href  ="http://localhost:8080/agileStatusQuery/index-detail.html?jobConfId="+row;
+						// window.location.href  ="http://localhost:8080/index-detail.html?jobConfId="+row;
+						window.open("http://localhost:8080/index-detail.html?jobConfId="+row,"_blank");
 					},
 					getData: function(){
 						var _self = this;

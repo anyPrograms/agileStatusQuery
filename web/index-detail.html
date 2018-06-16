@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>无标题文档</title>
+	<title>详情</title>
 	<link rel="stylesheet" href="resources/element-ui/element-ui.min.css"/>
 	<script src="resources/jquery.min.js"></script>
 	<script src="resources/vue-resource.min.js"></script>
@@ -56,19 +56,19 @@
 						border=true
 						stripe=true
 						style="width: 95% ;margin-top: 60px;margin-left:30px">
-							<el-table-column prop="jobConfId" sortable label="ID" width="180">
+							<el-table-column prop="jobConfId" label="ID" width="130">
 							</el-table-column>
-							<el-table-column prop="jobName" label="名称"	width="130">
+							<el-table-column prop="jobName" label="名称"	width="220">
 							</el-table-column>
-							<el-table-column prop="status" label="状态"	width="130">
+							<el-table-column prop="status" sortable label="状态"	width="130">
 							</el-table-column>
-							<el-table-column prop="startTime" label="开始时间"	width="220">
+							<el-table-column prop="startTime" sortable label="开始时间"	width="225">
 							</el-table-column>
-							<el-table-column prop="endTime" label="结束时间"	width="220">
+							<el-table-column prop="endTime" sortable label="结束时间"	width="225">
 							</el-table-column>
-							<el-table-column prop="duration" label="DURATION"	width="220">
+							<el-table-column prop="duration" sortable label="DURATION"	width="130">
 							</el-table-column>
-							<el-table-column prop="triggerUser" label="触发用户"	width="140">
+							<el-table-column prop="triggerUser" sortable label="触发用户"	width="150">
 							</el-table-column>
 						</el-table>
 						
@@ -100,7 +100,7 @@
 							url: "http://localhost:8080/details.do?jobConfId="+jobConfId,
 							dataType:"JSON",
 							success: function (result) {
-								_self.tableData=result.argument;
+								_self.tableData=result.arguments;
 								_self.moduleName = result.moduleName;
 							},
 							error: function (result) {
