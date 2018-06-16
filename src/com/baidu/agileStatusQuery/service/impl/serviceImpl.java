@@ -135,17 +135,21 @@ public class serviceImpl implements Iservice {
         jsonObjNew.put("moduleName", listObj.get(0).getName());
         String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfId;
         String jsonStr = this.sendPost("", url);
-        //字符串转json数组
-        JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
-        try {
-            for (int i = 0; i < jsonArrOrigin.size(); i++) {
-                argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(i));
-                jsonArr.add(this.javaBean2jsonObj(arguObj));
+        if(jsonStr.length()==2){
+            jsonObjNew.put("arguments",listObj.get(0).getArguments());
+        }else {
+            //字符串转json数组
+            JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
+            try {
+                for (int i = 0; i < jsonArrOrigin.size(); i++) {
+                    argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(i));
+                    jsonArr.add(this.javaBean2jsonObj(arguObj));
+                }
+                jsonObjNew.put("arguments", jsonArr);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("Transcode jsonObject to javaBean error::" + e);
             }
-            jsonObjNew.put("arguments",jsonArr);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("Transcode jsonObject to javaBean error::" + e);
         }
         return jsonObjNew.toString();
 
