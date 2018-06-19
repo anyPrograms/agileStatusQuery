@@ -22,11 +22,12 @@ public class clickForDetails extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String jobConfId = request.getParameter("jobConfId");
-            System.out.println("接收到的数据：jobConfId：" + jobConfId);
+            //System.out.println("接收到的数据：jobConfId：" + jobConfId);
 
             serviceImpl service = new serviceImpl();
             String result = service.clickForDetails(jobConfId);
-            System.out.println("返回的数据：" + result);
+            //System.out.println("返回的数据：" + result);
+            log.info("接收到的数据jobConfId："+jobConfId+";;返回的数据::"+result);
             out.write(result);
         } catch (Exception e) {
             e.printStackTrace();

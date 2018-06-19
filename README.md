@@ -1,7 +1,7 @@
 # agileStatusQuery
 ## agile job执行状态查询器
 
-### Author : Michael Joe,Min Li;
+### Author : Shichao Qiao,Min Li;
 
 ## 接口文档：
 ## 【初始化】
