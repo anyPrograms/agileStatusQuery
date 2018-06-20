@@ -13,7 +13,7 @@ public interface Iservice {
      * @return 返回一个json数组，存储所有的json对象，
      * @throws Exception
      */
-    public String initialize() throws Exception;
+    public String initialize(String name) throws Exception;
 
     /**
      * ②调用agile开发接口获得返回json列表

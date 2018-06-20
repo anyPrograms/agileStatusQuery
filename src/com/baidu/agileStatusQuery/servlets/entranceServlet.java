@@ -21,10 +21,10 @@ public class entranceServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         try{
-            //String idForQuery = request.getParameter("idForQuery");
+            String name = request.getParameter("name");
             //System.out.println("接受到的数据：" + idForQuery);
             serviceImpl service=new serviceImpl();
-            out.write(service.initialize());
+            out.write(service.initialize(name));
         }catch(Exception e){
             e.printStackTrace();
             log.error("entranceServlet error::"+e);

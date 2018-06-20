@@ -32,6 +32,6 @@ public interface IInfoDao {
      * @return 成功返回一个valueBeans对象的列表，否则返回空list
      * @throws Exception SQL执行异常
      */
-    public List<valueBean> doQueryInAll() throws Exception;
+    public List<valueBean> doQueryInAll(String searchLabel) throws Exception;
 
 }

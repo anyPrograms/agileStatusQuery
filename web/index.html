@@ -40,10 +40,10 @@
 
 						<el-form :inline="true"  class="demo-form-inline" style="padding-top: 20px;">
 							<el-form-item label="名称">
-									<el-input  placeholder="名称"></el-input>
+									<el-input v-model="searchLabel" placeholder="名称"></el-input>
 							</el-form-item>
 							<el-form-item>
-								<el-button type="primary">查询</el-button>
+								<el-button @click="search" type="primary">查询</el-button>
 							</el-form-item>
 						</el-form>
 						<div class="white">
@@ -79,21 +79,23 @@
 				el: '#app',
 		        data: function() {
 					return {
-						tableData:[]
+						tableData:[],
+						searchLabel:""
 					}
 		        },				
 				methods: {
-					handleClick: function(row) {
-						console.log(row);
+					search: function() {
+						this.getData();
 					},
 					check: function(row){
-						window.location.href  ="http://localhost:8080/agileStatusQuery/index-detail.html?jobConfId="+row;
+						window.location.href  ="/agileStatusQuery/index-detail.html?jobConfId="+row;
 					},
 					getData: function(){
 						var _self = this;
 						$.ajax({
 							type: "get",
 							url: "http://localhost:8080/initialize.do",
+							data:{name:_self.searchLabel},
 							dataType:"JSON",
 							success: function (result) {
 								_self.tableData=result;

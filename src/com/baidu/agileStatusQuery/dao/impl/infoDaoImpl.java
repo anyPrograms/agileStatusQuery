@@ -99,7 +99,7 @@ public class infoDaoImpl implements IInfoDao {
     }
 
     @Override
-    public List<valueBean> doQueryInAll(){
+    public List<valueBean> doQueryInAll(String searchLabel){
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
@@ -108,6 +108,7 @@ public class infoDaoImpl implements IInfoDao {
         try {
             conn = getConn();
             String sql = "select * from tb_info";
+            sql +=" where id like %"+searchLabel + "% or name like %"+searchLabel+"%";
             stat = conn.prepareStatement(sql);
             rs = stat.executeQuery();
             while(rs.next()){

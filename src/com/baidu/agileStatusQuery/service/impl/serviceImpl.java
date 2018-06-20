@@ -20,7 +20,7 @@ public class serviceImpl implements Iservice {
     private static final Logger log = Logger.getLogger(serviceImpl.class);
 
     @Override
-    public String initialize() {
+    public String initialize(String name) {
         infoDaoImpl infoObject = new infoDaoImpl();
         List<valueBean> listOfValue = new ArrayList<valueBean>();
         valueBean valueObject = new valueBean();
@@ -28,7 +28,7 @@ public class serviceImpl implements Iservice {
         JSONArray jsonArr = new JSONArray();
         JSONArray jsonArrFinal = new JSONArray();//存储最终结果
 
-        listOfValue = infoObject.doQueryInAll();
+        listOfValue = infoObject.doQueryInAll(name);
         try {
             for (int i = 0; i < listOfValue.size(); i++) {
                 valueObject = listOfValue.get(i);
