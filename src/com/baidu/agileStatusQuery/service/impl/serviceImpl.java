@@ -32,7 +32,8 @@ public class serviceImpl implements Iservice {
         try {
             for (int i = 0; i < listOfValue.size(); i++) {
                 valueObject = listOfValue.get(i);
-
+/** 
+ * 下面这部分代码是初始化首页的时候请求agile，并更新数据库，实际上并不需要这样做。直接读库取所需的字段即可。
                 String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + valueObject.getJobConfId();
                 String jsonStr = "[]";
                 jsonStr = this.sendPost("", url);
@@ -64,10 +65,10 @@ public class serviceImpl implements Iservice {
                 } else {
                     log.info("No data need to be updated!");
                 }
-//                //将arguments字段置为空，减少传输消耗；
-//                valueObject.setArguments("");
-                //    JSONObject jsonObj = this.javaBean2jsonObj(valueObject);
-                //jsonArr.add(jsonObj);
+
+                // JSONObject jsonObj = this.javaBean2jsonObj(valueObject);
+                // jsonArr.add(jsonObj);
+*/
                 jsonArrFinal.add(this.javaBean2jsonObj(valueObject));
             }
         } catch (Exception e) {
@@ -136,6 +137,7 @@ public class serviceImpl implements Iservice {
         String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfId;
         String jsonStr = this.sendPost("", url);
         if (jsonStr.length() == 2) {
+            //agile接口返回“[]”，因而从数据库读参数
             jsonObjNew.put("arguments", listObj.get(0).getArguments());
         } else {
             //字符串转json数组
@@ -175,8 +177,18 @@ public class serviceImpl implements Iservice {
         JSONObject jsonObj = new JSONObject();
         jsonObj.put("id", valueObj.getId());
         jsonObj.put("name", valueObj.getName());
-        jsonObj.put("jobConfId", valueObj.getJobConfId());
-        jsonObj.put("arguments", valueObj.getArguments());
+        String strOfJobConfId="";
+        JSONArray jobConfIdArray=JSONArray.fromObject(valueObj.getJobConfId());
+        for(int i=0;i<jobConfIdArray.size();i++){
+            JSONObject jsonObjTemp=jobConfIdArray.getJSONObject(i);
+            strOfJobConfId+=jsonObjTemp.get("jobConfId")+",";
+        }
+        //去掉最后一个逗号
+        strOfJobConfId=strOfJobConfId.substring(0,strOfJobConfId.length()-1);
+
+        jsonObj.put("jobConfId", strOfJobConfId);
+        //注释下面一行，initialize接口返回没有arguments项，第一个界面不需要
+        //jsonObj.put("arguments", valueObj.getArguments());
 
         return jsonObj;
     }
