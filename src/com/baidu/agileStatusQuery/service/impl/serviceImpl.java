@@ -32,7 +32,7 @@ public class serviceImpl implements Iservice {
                 valueObject = listOfValue.get(i);
 /**
  * 下面这部分代码是初始化首页的时候请求agile，并更新数据库，实际上并不需要这样做。直接读库取所需的字段即可。
- *              //下面一句，取到的jobConf为一个json数组，实际使用应取里面的jobConfId
+ *              //下面一句，取到的jobConf为一个json数组，实际使用应取json里面的jobConfId
  String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + valueObject.getJobConf();
  String jsonStr = "[]";
  jsonStr = this.sendPost("", url);
@@ -147,7 +147,7 @@ public class serviceImpl implements Iservice {
         jobConfIdStr = jobConfIdStr.substring(0, jobConfIdStr.length() - 1);
         String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfIdStr;
         String jsonStr = this.sendPost("", url);
-/////////////////////////////////////////////////////////////////这个从库中读参数应该去掉，改个不可能条件，因为arguments内不含有urlName
+
         if (jsonStr.length() == 2) {
             //agile接口返回“[]”，因而从数据库读参数
             jsonObjNew.put("arguments", listObj.get(0).getArguments());
@@ -161,6 +161,15 @@ public class serviceImpl implements Iservice {
                     jsonArr.add(this.javaBean2jsonObj(arguObj));
                 }
                 jsonObjNew.put("arguments", jsonArr);
+
+                //更新数据库
+                boolean result = infoObj.doUpdate("argu", id, jsonArr.toString());
+                if (result == true) {
+                    log.info("Update database successfully!");
+                } else {
+                    log.info("No data need to be updated!");
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error("Transcode jsonObject to javaBean error::" + e);
