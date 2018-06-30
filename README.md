@@ -17,55 +17,17 @@
     {
         "id":1,
         "name":"第一条查询",
-        "jobConfId":"778153",
-        "arguments":{
-            "jobConfId":"778153",
-            "jobName":"编译",
-            "status":"SUCC",
-            "endTime":"2018-06-07 19:38:34",
-            "startTime":"2018-06-07 19:34:01",
-            "duration":"4m33s",
-            "triggerUser":"wangcaixia01"
-        }
+        "jobConfId":"778153"
     },
     {
         "id":2,
         "name":"第二条记录",
-        "jobConfId":"803611",
-        "arguments":{
-            "jobConfId":"803611",
-            "jobName":"猫头鹰源码安全扫描",
-            "status":"CANCEL",
-            "endTime":"2018-06-07 19:50:48",
-            "startTime":"2018-06-07 19:38:35",
-            "duration":"12m13s",
-            "triggerUser":"wangcaixia01"
-        }
-    },
+        "jobConfId":"803611"
+        },
     {
         "id":3,
         "name":"金牌销售",
-        "jobConfId":"803611,778153",
-        "arguments":[
-            {
-                "jobConfId":"778153",
-                "jobName":"编译",
-                "status":"SUCC",
-                "endTime":"2018-06-07 19:38:34",
-                "startTime":"2018-06-07 19:34:01",
-                "duration":"4m33s",
-                "triggerUser":"wangcaixia01"
-            },
-            {
-                "jobConfId":"803611",
-                "jobName":"猫头鹰源码安全扫描",
-                "status":"CANCEL",
-                "endTime":"2018-06-07 19:50:48",
-                "startTime":"2018-06-07 19:38:35",
-                "duration":"12m13s",
-                "triggerUser":"wangcaixia01"
-            }
-        ]
+        "jobConfId":"803611,778153"
     }
 ]
 ```
@@ -76,30 +38,30 @@
 ### 参数列表：
 |参数|含义|必选|说明|
 |---|---|---|---|
-|jobConfId|任务Id|是|","逗号分隔，如：123,456|
+|id|记录索引|是|","逗号分隔，如：1,2,3|
 
 ### 返回格式：
 ``` json
 {
-    "moduleName": "金牌销售",
-    "arguments": [
+    "moduleName":"金牌销售测试环境",
+    "arguments":[
         {
-            "jobConfId": "778153",
-            "jobName": "编译",
-            "status": "SUCC",
-            "startTime": "2018-06-12 14:59:07",
-            "endTime": "2018-06-12 15:01:56",
-            "duration": "2m49s",
-            "triggerUser": "wangcaixia01"
+            "jobConfId":"198667",
+            "urlName":"http://agile.baidu.com/#/builds/baidu/cop-rigel/goldsales@Master.qa@branches",
+            "jobName":"编译",
+            "status":"SUCC",
+            "startTime":"2018-06-27 14:29:57",
+            "endTime":"2018-06-27 14:40:16",
+            "duration":"10m19s",
+            "triggerUser":"xuke07"
         },
         {
-            "jobConfId": "803611",
-            "jobName": "猫头鹰源码安全扫描",
-            "status": "SUCC",
-            "startTime": "2018-06-12 15:01:57",
-            "endTime": "2018-06-12 15:27:01",
-            "duration": "25m4s",
-            "triggerUser": "wangcaixia01"
+            "jobConfId":"198670",
+            "urlName":"http://agile.baidu.com/#/builds/baidu/cop-rigel/goldsales@Master.qa@branches",
+            "jobName":"发布",
+            "status":"WAITTING",
+            "duration":null,
+            "triggerUser":null
         }
     ]
 }

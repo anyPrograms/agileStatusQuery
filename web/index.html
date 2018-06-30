@@ -89,13 +89,13 @@
 					check: function(row){
 						// window.location.href  ="http://localhost:8080/agileStatusQuery/index-detail.html?id="+row;
 						// window.location.href  ="http://localhost:8080/index-detail.html?id="+row;
-						window.open("http://localhost:8080/index-detail.html?id="+row,"_blank");
+						window.open("http://10.100.27.52:8099/agilestatusquery/index-detail.html?id="+row,"_blank");
 					},
 					getData: function(){
 						var _self = this;
 						$.ajax({
 							type: "get",
-							url: "http://localhost:8080/initialize.do",
+							url: "http://10.100.27.52:8099/agilestatusquery/initialize.do",
 							dataType:"JSON",
 							success: function (result) {
 								_self.tableData=result;

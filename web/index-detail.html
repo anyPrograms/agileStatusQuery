@@ -107,7 +107,7 @@
                 var _self = this;
                 $.ajax({
                     type: "get",
-                    url: "http://localhost:8080/details.do?id=" + indexId,
+                    url: "http://10.100.27.52:8099/agilestatusquery/details.do?id=" + indexId,
                     dataType: "JSON",
                     success: function (result) {
                         _self.tableData = result.arguments;
