@@ -10,7 +10,7 @@ public class valueBean {
 
     private int id;
     private String name;
-    private String jobConfId;
+    private String jobConf;
     private String arguments;
 
     public int getId() {
@@ -29,12 +29,12 @@ public class valueBean {
         this.name = name;
     }
 
-    public String getJobConfId() {
-        return jobConfId;
+    public String getJobConf() {
+        return jobConf;
     }
 
-    public void setJobConfId(String jobConfId) {
-        this.jobConfId = jobConfId;
+    public void setJobConfId(String jobConf) {
+        this.jobConf = jobConf;
     }
 
     public String getArguments() {

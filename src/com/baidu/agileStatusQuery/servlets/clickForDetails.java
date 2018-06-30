@@ -21,13 +21,13 @@ public class clickForDetails extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String jobConfId = request.getParameter("jobConfId");
+            String id = request.getParameter("id");
             //System.out.println("接收到的数据：jobConfId：" + jobConfId);
 
             serviceImpl service = new serviceImpl();
-            String result = service.clickForDetails(jobConfId);
+            String result = service.clickForDetails(id);
             //System.out.println("返回的数据：" + result);
-            log.info("接收到的数据jobConfId："+jobConfId+";;返回的数据::"+result);
+            log.info("接收到的数据id："+id+";;返回的数据::"+result);
             out.write(result);
         } catch (Exception e) {
             e.printStackTrace();

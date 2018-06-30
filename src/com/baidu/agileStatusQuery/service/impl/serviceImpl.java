@@ -12,9 +12,7 @@ import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class serviceImpl implements Iservice {
     private static final Logger log = Logger.getLogger(serviceImpl.class);
@@ -32,43 +30,44 @@ public class serviceImpl implements Iservice {
         try {
             for (int i = 0; i < listOfValue.size(); i++) {
                 valueObject = listOfValue.get(i);
-/** 
+/**
  * 下面这部分代码是初始化首页的时候请求agile，并更新数据库，实际上并不需要这样做。直接读库取所需的字段即可。
-                String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + valueObject.getJobConfId();
-                String jsonStr = "[]";
-                jsonStr = this.sendPost("", url);
+ *              //下面一句，取到的jobConf为一个json数组，实际使用应取里面的jobConfId
+ String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + valueObject.getJobConf();
+ String jsonStr = "[]";
+ jsonStr = this.sendPost("", url);
 
-                JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
+ JSONArray jsonArrOrigin = JSONArray.fromObject(jsonStr);
 
-                //当远程数据为空的时候，读本地数据库存储的数据；
-                if (jsonArrOrigin.size() == 0) {
+ //当远程数据为空的时候，读本地数据库存储的数据；
+ if (jsonArrOrigin.size() == 0) {
 
-                } else if (jsonArrOrigin.size() == 1) {
-                    valueObject.setArguments(jsonStr);//将agile返回数据存入对象
-                    argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(0));
-                    JSONObject jsonObj_temp = this.javaBean2jsonObj(arguObj);
-                    valueObject.setArguments(jsonObj_temp.toString());//将该json对象转换为valueBean对象的参数
-                } else {
-                    valueObject.setArguments(jsonStr);//将agile返回数据存入对象
-                    JSONArray jsonArrForMultiObjects = new JSONArray();
-                    for (int j = 0; j < jsonArrOrigin.size(); j++) {
-                        argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(j));
-                        jsonArrForMultiObjects.add(this.javaBean2jsonObj(arguObj));
-                    }
-                    valueObject.setArguments(jsonArrForMultiObjects.toString());//将该json数组转换为valueBean对象的参数
-                }
+ } else if (jsonArrOrigin.size() == 1) {
+ valueObject.setArguments(jsonStr);//将agile返回数据存入对象
+ argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(0));
+ JSONObject jsonObj_temp = this.javaBean2jsonObj(arguObj);
+ valueObject.setArguments(jsonObj_temp.toString());//将该json对象转换为valueBean对象的参数
+ } else {
+ valueObject.setArguments(jsonStr);//将agile返回数据存入对象
+ JSONArray jsonArrForMultiObjects = new JSONArray();
+ for (int j = 0; j < jsonArrOrigin.size(); j++) {
+ argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(j));
+ jsonArrForMultiObjects.add(this.javaBean2jsonObj(arguObj));
+ }
+ valueObject.setArguments(jsonArrForMultiObjects.toString());//将该json数组转换为valueBean对象的参数
+ }
 
-                //更新数据库
-                boolean result = infoObject.doUpdate("argu", String.valueOf(valueObject.getId()), valueObject.getArguments());
-                if (result == true) {
-                    log.info("Update database successfully!");
-                } else {
-                    log.info("No data need to be updated!");
-                }
+ //更新数据库
+ boolean result = infoObject.doUpdate("argu", String.valueOf(valueObject.getId()), valueObject.getArguments());
+ if (result == true) {
+ log.info("Update database successfully!");
+ } else {
+ log.info("No data need to be updated!");
+ }
 
-                // JSONObject jsonObj = this.javaBean2jsonObj(valueObject);
-                // jsonArr.add(jsonObj);
-*/
+ // JSONObject jsonObj = this.javaBean2jsonObj(valueObject);
+ // jsonArr.add(jsonObj);
+ */
                 jsonArrFinal.add(this.javaBean2jsonObj(valueObject));
             }
         } catch (Exception e) {
@@ -123,19 +122,32 @@ public class serviceImpl implements Iservice {
     }
 
     @Override
-    public String clickForDetails(String jobConfId) {
+    public String clickForDetails(String id) {
         JSONObject jsonObjNew = new JSONObject();//用于存储模块名和返回的json数组
         JSONArray jsonArr = new JSONArray();//用于存储从unix时间戳转换为普通时间之后的json对象
         JSONObject jsonObj = new JSONObject();
         infoDaoImpl infoObj = new infoDaoImpl();
+        Map<String, String> mapJobConf = new HashMap<String, String>();
 
-        List<valueBean> listObj = infoObj.doQuery("jobConfId", jobConfId);
+        List<valueBean> listObj = infoObj.doQuery("id", id);
         if (listObj.size() == 0) {
             return "null";
         }
         jsonObjNew.put("moduleName", listObj.get(0).getName());
-        String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfId;
+        String jobConfIdStr = "";
+        JSONArray jsonArrJobConf = JSONArray.fromObject(listObj.get(0).getJobConf());
+        //取jobConf内的jobConfId
+        for (int i = 0; i < jsonArrJobConf.size(); i++) {
+            JSONObject jsonObjJobConf = jsonArrJobConf.getJSONObject(i);
+            jobConfIdStr += jsonObjJobConf.getString("jobConfId") + ",";
+            //将jobConfId和urlName放入map中
+            mapJobConf.put(jsonObjJobConf.getString("jobConfId"), jsonObjJobConf.getString("urlName"));
+        }
+        //去掉最后一个逗号
+        jobConfIdStr = jobConfIdStr.substring(0, jobConfIdStr.length() - 1);
+        String url = "http://agile.baidu.com/api/agile/lastSimpleJobBuild?jobConfIds=" + jobConfIdStr;
         String jsonStr = this.sendPost("", url);
+/////////////////////////////////////////////////////////////////这个从库中读参数应该去掉，改个不可能条件，因为arguments内不含有urlName
         if (jsonStr.length() == 2) {
             //agile接口返回“[]”，因而从数据库读参数
             jsonObjNew.put("arguments", listObj.get(0).getArguments());
@@ -145,6 +157,7 @@ public class serviceImpl implements Iservice {
             try {
                 for (int i = 0; i < jsonArrOrigin.size(); i++) {
                     argumentsBean arguObj = this.jsonObj2javaBean(jsonArrOrigin.getJSONObject(i));
+                    arguObj.setUrlName(mapJobConf.get(jsonArrOrigin.getJSONObject(i).getString("jobConfId")));
                     jsonArr.add(this.javaBean2jsonObj(arguObj));
                 }
                 jsonObjNew.put("arguments", jsonArr);
@@ -162,6 +175,7 @@ public class serviceImpl implements Iservice {
         JSONObject jsonObj = new JSONObject();
 
         jsonObj.put("jobConfId", arguObj.getJobConfId());
+        jsonObj.put("urlName",arguObj.getUrlName());
         jsonObj.put("jobName", arguObj.getJobName());
         jsonObj.put("status", arguObj.getStatus());
         jsonObj.put("startTime", arguObj.getStartTime());
@@ -177,14 +191,14 @@ public class serviceImpl implements Iservice {
         JSONObject jsonObj = new JSONObject();
         jsonObj.put("id", valueObj.getId());
         jsonObj.put("name", valueObj.getName());
-        String strOfJobConfId="";
-        JSONArray jobConfIdArray=JSONArray.fromObject(valueObj.getJobConfId());
-        for(int i=0;i<jobConfIdArray.size();i++){
-            JSONObject jsonObjTemp=jobConfIdArray.getJSONObject(i);
-            strOfJobConfId+=jsonObjTemp.get("jobConfId")+",";
+        String strOfJobConfId = "";
+        JSONArray jobConfIdArray = JSONArray.fromObject(valueObj.getJobConf());
+        for (int i = 0; i < jobConfIdArray.size(); i++) {
+            JSONObject jsonObjTemp = jobConfIdArray.getJSONObject(i);
+            strOfJobConfId += jsonObjTemp.get("jobConfId") + ",";
         }
         //去掉最后一个逗号
-        strOfJobConfId=strOfJobConfId.substring(0,strOfJobConfId.length()-1);
+        strOfJobConfId = strOfJobConfId.substring(0, strOfJobConfId.length() - 1);
 
         jsonObj.put("jobConfId", strOfJobConfId);
         //注释下面一行，initialize接口返回没有arguments项，第一个界面不需要

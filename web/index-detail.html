@@ -1,120 +1,133 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>详情</title>
-	<link rel="stylesheet" href="resources/element-ui/element-ui.min.css"/>
-	<script src="resources/jquery.min.js"></script>
-	<script src="resources/vue-resource.min.js"></script>
-	<script src="resources/vue.min.js"></script>
-	<script src="resources/element-ui/element-ui.min.js"></script>
-	
-  	<script src="resources/element-ui/lib/umd/locale/zh-CN.js"></script>
-	<script src="resources/element-ui/lib/umd/locale/en.js"></script>
-	
-	<link href="css.css" type="text/css" rel="stylesheet" />
-	<style>
-		.el-form-item__label {
-			text-align: right;
-			float: left;
-			font-size: 20px;	
-			color: #606266;
-			line-height: 40px;
-			padding: 0 12px 0 0;
-			-webkit-box-sizing: border-box;
-			box-sizing: border-box;
-		}
-		.el-table th {
-			text-align: center;
-			white-space: nowrap;
-			overflow: hidden;
-			user-select: none;
-		}
-	</style>
-</head>
-	<body>
-		<div class="main">
-			<div class="main1">
-				<div class="main11">
-					<div id = "app">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>详情</title>
+    <link rel="stylesheet" href="resources/element-ui/element-ui.min.css"/>
+    <script src="resources/jquery.min.js"></script>
+    <script src="resources/vue-resource.min.js"></script>
+    <script src="resources/vue.min.js"></script>
+    <script src="resources/element-ui/element-ui.min.js"></script>
 
-						<!-- <el-form :inline="true"  class="demo-form-inline" style="padding-top: 20px;">
-							<el-form-item label="名称">
-									<el-input  placeholder="名称"></el-input>
-							</el-form-item>
-							<el-form-item>
-								<el-button type="primary" >查询</el-button>
-							</el-form-item> -->
-						</el-form>
-						<div class="white">
-						</div>
-						<div class="main-list-title">
-								<span>{{moduleName}}</span>
-						</div>
-						
-						<el-table  :data="tableData"
-						border=true
-						stripe=true
-						style="width: 95% ;margin-top: 60px;margin-left:30px">
-							<el-table-column prop="jobConfId" label="ID" width="120">
-							</el-table-column>
-							<el-table-column prop="jobName" label="名称"	width="220">
-							</el-table-column>
-							<el-table-column prop="status" sortable label="状态"	width="130">
-							</el-table-column>
-							<el-table-column prop="startTime" sortable label="开始时间"	width="225">
-							</el-table-column>
-							<el-table-column prop="endTime" sortable label="结束时间"	width="225">
-							</el-table-column>
-							<el-table-column prop="duration" sortable label="DURATION"	width="140">
-							</el-table-column>
-							<el-table-column prop="triggerUser" sortable label="触发用户"	width="150">
-							</el-table-column>
-						</el-table>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<script type="text/javascript">
-			var getQueryString = function (name){
-			    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			    var r = window.location.search.substr(1).match(reg);
-			    if(r!=null)return  unescape(r[2]); return null;
-			};
-			var jobConfId = getQueryString("jobConfId");
-			var vm = new Vue({
-				el: '#app',
-		        data: function() {
-					return {
-						tableData:[],
-						moduleName:""
-					}
-		        },				
-				methods: {
-					getData: function(){
-						var _self = this;
-						$.ajax({
-							type: "get",
-							url: "http://localhost:8080/details.do?jobConfId="+jobConfId,
-							dataType:"JSON",
-							success: function (result) {
-								_self.tableData=result.arguments;
-								_self.moduleName = result.moduleName;
-							},
-							error: function (result) {
-								_self.tableData=[{id:"idFailed"}];
-								_self.moduleName = "failed";
-							}
-						});
-					}
-				},
-				created:function(){
-					this.getData();
-				}
-		    })
-		</script>
-	</body>	
+    <script src="resources/element-ui/lib/umd/locale/zh-CN.js"></script>
+    <script src="resources/element-ui/lib/umd/locale/en.js"></script>
+
+    <link href="css.css" type="text/css" rel="stylesheet"/>
+    <style>
+        .el-form-item__label {
+            text-align: right;
+            float: left;
+            font-size: 20px;
+            color: #606266;
+            line-height: 40px;
+            padding: 0 12px 0 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .el-table th {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="main1">
+        <div class="main11">
+            <div id="app">
+
+                <!-- <el-form :inline="true"  class="demo-form-inline" style="padding-top: 20px;">
+                    <el-form-item label="名称">
+                            <el-input  placeholder="名称"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" >查询</el-button>
+                    </el-form-item>
+                </el-form>
+                <div class="white">
+                </div>  -->
+                <div class="main-list-title">
+                    <span>{{moduleName}}</span>
+                </div>
+
+                <el-table :data="tableData"
+                          border=true
+                          stripe=true
+                          style="width: 95% ;margin-top: 60px;margin-left:30px">
+                    <el-table-column prop="jobConfId" label="ID" width="120">
+                    </el-table-column>
+                    <el-table-column prop="jobName" label="名称" width="220">
+                    </el-table-column>
+                    <el-table-column prop="urlName" label="跳转url" width="120" v-if="false">
+                    </el-table-column>
+                    <el-table-column prop="status" sortable label="状态" width="130">
+                    </el-table-column>
+                    <el-table-column prop="startTime" sortable label="开始时间" width="225">
+                    </el-table-column>
+                    <el-table-column prop="endTime" sortable label="结束时间" width="225">
+                    </el-table-column>
+                    <el-table-column prop="duration" sortable label="DURATION" width="140">
+                    </el-table-column>
+                    <el-table-column prop="triggerUser" sortable label="触发用户" width="150">
+                    </el-table-column>
+                    <el-table-column inline-template label="操作" align="center">
+                        <div>
+                            <el-button type="text" size="small" @click.native="check(row.urlName)">详情</el-button>
+                        </div>
+                    </el-table-column>
+                </el-table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var getQueryString = function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    };
+    var indexId = getQueryString("id");
+    var vm = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                tableData: [],
+                moduleName: ""
+            }
+        },
+        methods: {
+            getData: function () {
+                var _self = this;
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:8080/details.do?id=" + indexId,
+                    dataType: "JSON",
+                    success: function (result) {
+                        _self.tableData = result.arguments;
+                        _self.moduleName = result.moduleName;
+                    },
+                    error: function (result) {
+                        _self.tableData = [{id: "idFailed"}];
+                        _self.moduleName = "failed";
+                    }
+                });
+            },
+            check: function (row) {
+                window.open(row, "_blank");
+            }
+        },
+        created: function () {
+            this.getData();
+        }
+    })
+</script>
+</body>
 
 </html>

@@ -69,8 +69,8 @@ public class infoDaoImpl implements IInfoDao {
                     sql = "select * from tb_info"+" WHERE id=" + value;
                     break;
                 }
-                case "jobConfId": {
-                    sql = "select * from tb_info"+" WHERE jobConfId=" + value;
+                case "jobConf": {
+                    sql = "select * from tb_info"+" WHERE jobConf=" + value;
                     break;
                 }
                 default: {
@@ -85,7 +85,7 @@ public class infoDaoImpl implements IInfoDao {
                 valueBean valueObject = new valueBean();
                 valueObject.setId(rs.getInt("id"));
                 valueObject.setName(rs.getString("name"));
-                valueObject.setJobConfId(rs.getString("jobConfId"));
+                valueObject.setJobConfId(rs.getString("jobConf"));
                 valueObject.setArguments(rs.getString("arguments"));
                 listOfValue.add(valueObject);
             }
@@ -114,7 +114,7 @@ public class infoDaoImpl implements IInfoDao {
                 valueBean valueObject = new valueBean();
                 valueObject.setId(rs.getInt("id"));
                 valueObject.setName(rs.getString("name"));
-                valueObject.setJobConfId(rs.getString("jobConfId"));
+                valueObject.setJobConfId(rs.getString("jobConf"));
                 valueObject.setArguments(rs.getString("arguments"));
                 listOfValue.add(valueObject);
             }

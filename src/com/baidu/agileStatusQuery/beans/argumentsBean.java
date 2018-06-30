@@ -5,6 +5,7 @@ package com.baidu.agileStatusQuery.beans;
  */
 public class argumentsBean {
     private String jobConfId;
+    private String urlName;
     private String jobName;
     private String status;
     private String startTime;
@@ -15,6 +16,7 @@ public class argumentsBean {
     /**
      * moduleName : goldsales
      * jobConfId : 52869
+     * urlName : "http://agile.baidu.com/#/builds/baidu/cop-rigel/gaia-base@Master@dev"
      * jobName : 编译
      * status : SUCC
      * endTime : 2008-07-11 21:13:47
@@ -30,6 +32,14 @@ public class argumentsBean {
 
     public void setJobConfId(String jobConfId) {
         this.jobConfId = jobConfId;
+    }
+
+    public String getUrlName(){
+        return urlName;
+    }
+
+    public void setUrlName(String urlName){
+        this.urlName=urlName;
     }
 
     public String getJobName() {
